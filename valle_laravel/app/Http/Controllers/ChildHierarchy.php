@@ -1,13 +1,13 @@
 <?php
-​
+
 namespace App\Http\Controllers;
-​
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-​
+
 class ChildHierarchy extends Controller
 {
-​
+
     public function townsByDepartment ($id) {
         $ol = env('OPEN_LOCATION_DB');
         $towns = DB::table($ol.'.towns')
@@ -25,10 +25,10 @@ class ChildHierarchy extends Controller
         ->get();
         return $towns;
     }
-​
+
     public function institutionsByTown ($id) {
         $ol = env('OPEN_LOCATION_DB');
-​
+
         $institutions = DB::table($ol.'.institutions')
         ->join($ol.'.headquarters',$ol.'.headquarters.institution_id',$ol.'.institutions.id')
         ->join('game_users','game_users.headquarter_id',$ol.'.headquarters.id')
@@ -44,7 +44,7 @@ class ChildHierarchy extends Controller
         ->get();
         return $institutions;
     }
-​
+    
     public function headquartersByInstitutions ($id){
         $ol = env('OPEN_LOCATION_DB');
         // $headquarters = json_decode(file_get_contents($open_location.'api/headquartersByInstitution/'.$id), true);
@@ -62,7 +62,7 @@ class ChildHierarchy extends Controller
         ->get();
         return $headquarters;
     }
-​
+    
     public function groupsByHeadquarters ($id) {
         $groups = DB::table('game_users')
         ->join('grades', 'game_users.grade_id', 'grades.id')
@@ -78,7 +78,7 @@ class ChildHierarchy extends Controller
         ->get();
         return $groups;
     }
-​
+
     public function studentsByGroups ($id1, $id2) {
         $students = DB::table('game_users')
         ->join('grades', 'game_users.grade_id', 'grades.id')
