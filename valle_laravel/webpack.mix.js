@@ -1,6 +1,5 @@
 const mix = require("laravel-mix");
-const dotenv = require('dotenv');
-
+const dotenv = require("dotenv");
 
 /*
  |--------------------------------------------------------------------------
@@ -20,17 +19,16 @@ mix.react("resources/js/app.js", "public/js")
 // call dotenv and it will return an Object with a parsed key
 const env = dotenv.config().parsed;
 // reduce it to a nice object, the same as before
-const envKeys = Object
-    .keys(env)
-    .reduce((prev, next) => { prev[`process.env.${next}`] = JSON.stringify(env[next]); return prev; }, {});
+const envKeys = Object.keys(env).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+}, {});
 
-mix.webpackConfig((webpack) => {
+mix.webpackConfig(webpack => {
     return {
-        /* output: {
-            publicPath: "https://www.google.com.co/"
-        }, */
-        plugins: [
-            new webpack.DefinePlugin(envKeys)
-        ]
+        output: {
+            publicPath: "/valle/si/"
+        },
+        plugins: [new webpack.DefinePlugin(envKeys)]
     };
 });
